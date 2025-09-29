@@ -1,0 +1,14 @@
+{
+  "name": "sqsworker",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Lambda to process SQS messages and save clicks to S3",
+  "main": "handler.js",
+  "scripts": {
+    "start": "node handler.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.896.0",
+    "@aws-sdk/client-sqs": "^3.896.0"
+  }
+}

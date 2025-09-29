@@ -1,0 +1,41 @@
+service: sqsworker
+org: prashantswaroop001
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-south-1
+  environment:
+    CLICK_BUCKET: click-analytics-demo-001
+    CLICK_QUEUE_URL:
+      Ref: ClickQueue  # This resolves to the SQS URL at deploy time
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:GetObject
+      Resource: arn:aws:s3:::click-analytics-demo-001/*
+
+functions:
+  processClicks:
+    handler: handler.processClicks
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - ClickQueue
+              - Arn
+          batchSize: 10
+          maximumBatchingWindow: 60
+
+resources:
+  Resources:
+    ClickQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ClickQueue
+
+    ClickBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: click-analytics-demo-001
