@@ -4,6 +4,13 @@ This project is an extension of a URL shortener application, designed to **decou
 
 <br>
 
+### 🖼️ Diagram 
+
+<img width="1127" height="476" alt="Architecture Diagram" src="https://github.com/user-attachments/assets/b7e6a447-b553-4eb0-8cc0-ba8b87495002" />
+
+-----
+
+
 ### ✨ Key Features
 
   * **Decoupled Architecture**: The analytics pipeline runs independently of the main server, preventing performance degradation on the primary service.
